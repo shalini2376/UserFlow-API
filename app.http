@@ -1,0 +1,39 @@
+### Home route
+GET http://localhost:5009/
+
+### Get all users
+GET http://localhost:5009/users
+
+### Get a single User
+GET http://localhost:5009/users/2
+
+### Create a user
+POST http://localhost:5009/users
+Content-Type: application/json
+
+{
+  "name": "Shalini",
+  "email": "shalini@example.com",
+  "password": "abc123"
+}
+
+### Update a user
+PUT http://localhost:5009/users/4
+Content-Type: application/json
+
+{
+  "name": "Updated Shalini",
+  "email": "newemail@example.com"
+}
+
+### Delete a user
+DELETE http://localhost:5009/user/6
+
+### Login
+POST http://localhost:5009/login
+Content-Type: application/json
+
+{
+  "email": "shalini@example.com",
+  "password": "abc123"
+}
