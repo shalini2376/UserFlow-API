@@ -1,120 +1,187 @@
-# Code Refactoring Challenge
+## 🧩 UserFlow API
 
-## Overview
-You've inherited a legacy user management API that works but has significant issues. Your task is to refactor and improve this codebase while maintaining its functionality.
+A clean and modular User Management Backend Service built using Python Flask and SQLite.
+UserFlow API provides secure authentication, complete CRUD operations, search functionality, and well-structured JSON responses.
+Designed as a lightweight backend microservice following clean API design principles.
 
-## Getting Started
+## 🔗 Live API (Render Deployment)
 
-### Prerequisites
-- Python 3.8+ installed
-- 3 hours of uninterrupted time
+👉 https://retainsure-task-1.onrender.com
 
-### Setup (Should take < 5 minutes)
-```bash
-# Clone/download this repository
-# Navigate to the assignment directory
-cd messy-migration
+## 🚀 Features
 
-# Install dependencies
-pip install -r requirements.txt
+## 🔧 1. Complete User CRUD
 
-# Initialize the database
-python init_db.py
+| Method | Endpoint      | Description       |
+| ------ | ------------- | ----------------- |
+| GET    | `/users`      | Fetch all users   |
+| GET    | `/users/<id>` | Fetch single user |
+| POST   | `/users`      | Create new user   |
+| PUT    | `/users/<id>` | Update user       |
+| DELETE | `/user/<id>`  | Delete user       |
 
-# Start the application
-python app.py
 
-# The API will be available at http://localhost:5000
+## 🔍 2. Search Users
+
+Search users by name:
+
+- GET /search?name=john
+
+## 🔐 3. Authentication
+
+- Login using hashed password verification:
+
+👉 POST /login  
+{  
+  "email": "user@example.com",  
+  "password": "mypassword"  
+}  
+Password hashing via Werkzeug Security.
+
+##  ⚙️ 4. Database Layer
+
+- SQLite-powered storage
+
+- Safe parameterized queries
+
+- Automatic connection handling via get_db_connection()
+
+## 🛡 5. Strong Error Handling
+
+Covers:
+
+- Missing fields
+
+- Invalid credentials
+
+- User not found
+
+- SQL errors
+
+- Unexpected exceptions
+
+Returns correct HTTP status codes such as 200, 201, 400, 401, 404, 500.
+
+## 🛠 Tech Stack
+
+- Python 3
+- Flask
+- SQLite
+- Werkzeug Security
+- REST API Architecture
+
+## 📁 Project Structure
+
+```
+├── app.py
+├── init_db.py
+├── users.db
+├── requirements.txt
+└── README.md
+
 ```
 
-### Testing the Application
-The application provides these endpoints:
-- `GET /` - Health check
-- `GET /users` - Get all users
-- `GET /user/<id>` - Get specific user
-- `POST /users` - Create new user
-- `PUT /user/<id>` - Update user
-- `DELETE /user/<id>` - Delete user
-- `GET /search?name=<name>` - Search users by name
-- `POST /login` - User login
+## ▶️ How to Run Locally
 
-## Your Task
+1️⃣ Clone the repository
+git clone https://github.com/shalini2376/userflow-api  
+cd userflow-api  
 
-### Time Limit: 3 Hours
+2️⃣ Create virtual environment (optional)
+python -m venv venv  
+venv\Scripts\activate           # Windows  
 
-Refactor this codebase to improve its quality, security, and maintainability. The application currently works but has numerous issues that need addressing.
+3️⃣ Install dependencies
+pip install -r requirements.txt  
 
-### What We're Looking For
+4️⃣ Initialize the database  
+python init_db.py  
 
-1. **Code Organization (25%)**
-   - Proper separation of concerns
-   - Clear project structure
-   - Meaningful function/variable names
+5️⃣ Start the server  
+python app.py   
 
-2. **Security Improvements (25%)**
-   - Identify and fix security vulnerabilities
-   - Implement proper data validation
-   - Secure sensitive information
+## 🟢 Server is available at:
+http://127.0.0.1:5009
 
-3. **Best Practices (25%)**
-   - Error handling
-   - Proper HTTP status codes
-   - Code reusability
+## 📌 API Usage Examples
 
-4. **Documentation (25%)**
-   - Clear explanation of changes made
-   - Justification for architectural decisions
-   - Any trade-offs you made
+➕ Create User
 
-### What to Focus On
-- Identify the most critical issues first
-- Make the code production-ready
-- Ensure the API remains functional
-- Write at least a few tests for critical functionality
+POST /users
+{  
+  "name": "Alice",  
+  "email": "alice@example.com",  
+  "password": "mypassword"  
+}  
 
-### What NOT to Do
-- Don't add new features or endpoints
-- Don't spend time on UI/frontend
-- Don't over-engineer the solution
-- Don't aim for 100% test coverage
-- Don't create extensive documentation beyond explaining your changes
+## 🔍 Get All Users
+GET /users
 
-## Submission
+🔎 Search Users  
+GET /search?name=al  
 
-### Deliverables
-1. Your refactored code
-2. A `CHANGES.md` file documenting:
-   - Major issues you identified
-   - Changes you made and why
-   - Any assumptions or trade-offs
-   - What you would do with more time
+## 🔐 Login
+POST /login 
+{  
+  "email": "alice@example.com",  
+  "password": "mypassword"  
+}  
+  
+## 🧪 API Testing (.http file | VSCode REST Client)
 
-### How to Submit
-1. Create a new git repository with your solution
-2. Include all necessary files to run the application
-3. Ensure `python app.py` still works after setup
-4. Share the repository link on https://forms.gle/gpaV5LW5boDFk7uT6
+Use this block inside a .http file to test all endpoints:
 
-## Evaluation Criteria
+### Home route  
+GET http://localhost:5009/  
 
-We will evaluate your submission based on:
-- Identification of critical issues
-- Quality of solutions implemented
-- Code readability and organization
-- Pragmatic decision-making
-- Clear communication of changes
+### Get all users  
+GET http://localhost:5009/users    
 
-## AI Usage Policy
+### Get a single user  
+GET http://localhost:5009/users/2  
 
-You are permitted to use AI assistants (ChatGPT, GitHub Copilot, etc.) as you would any other tool. If you use AI significantly, please note in your CHANGES.md:
-- Which tools you used
-- What you used them for
-- Any AI-generated code you modified or rejected
+### Create a user  
+POST http://localhost:5009/users  
+Content-Type: application/json  
 
-## Questions?
+{  
+  "name": "Shalini",  
+  "email": "shalini@example.com",  
+  "password": "abc123"  
+}
 
-If you have questions about the requirements, please email [anand@retainsure.com] within the first 30 minutes of starting.
+### Update a user  
+PUT http://localhost:5009/users/4  
+Content-Type: application/json  
 
----
+{
+  "name": "Updated Shalini",  
+  "email": "newemail@example.com",  
+  "password": "abc123"  
+}
 
-Remember: We're not looking for perfection. We want to see how you approach real-world code problems, prioritize improvements, and communicate your decisions.
+### Delete a user  
+DELETE http://localhost:5009/user/6  
+
+### Login  
+POST http://localhost:5009/login  
+Content-Type: application/json  
+
+{  
+  "email": "shalini@example.com",  
+  "password": "abc123"  
+}
+
+## 🌟 What I Learned
+
+- Building REST APIs in Flask
+
+- Managing databases using SQLite
+
+- Implementing secure password hashing & login
+
+- Writing clean, modular backend code
+
+- Handling errors and returning appropriate HTTP status codes
+
+- Testing APIs using .http files and REST clients
